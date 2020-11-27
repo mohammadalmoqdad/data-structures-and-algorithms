@@ -17,12 +17,12 @@ let starWarsPeople = [
   {
     "name": "C-3PO",
     "height": "167",
-    "eye_color": "yellow"
+    "eye_color": "red"
   },
   {
     "name": "R2-D2",
     "height": "96",
-    "eye_color": "red"
+    "eye_color": "yellow"
   }
 ];
 
@@ -38,11 +38,14 @@ let $ = createSnippetWithJQuery(`
 
 const templateWithJQuery = () => {
   // Solution code here...
+  // console.log($.html());
   starWarsPeople.forEach(element => {
-    
-  let html = Mustache.render(createSnippetWithJQuery(html),element);
-  $('main').append(html);    
-  });
+    let template=$('#template').clone();
+    template.find('h2').text(element.name);
+    template.find('h3').text(element.height);
+    template.find('p').text(element.eye_color);
+    $('main').append(template);
+    });
 }
 
 /* ------------------------------------------------------------------------------------------------
@@ -57,14 +60,17 @@ Your function should use slice within a loop and return an array of each success
 For example, if the input is 'Welcome', the output will be:
 ['Welcome', 'elcome', 'lcome', 'come', 'ome', 'me', 'e', ''].
 ------------------------------------------------------------------------------------------------ */
-
+//input string
+// output 
 const howMuchPencil = (str) => {
   let result = [];
   // Solution code here...
-  str=str.reverseString();
- while(str!=''){
-  result.push(str.slice(0,str.length+1));
-   }
+  let arrOfStr = str.split('');
+  result.push(str);
+  while (arrOfStr.length) {
+    arrOfStr.shift();
+    result.push(arrOfStr.join(''));
+  }
   return result;
 };
 
@@ -78,6 +84,12 @@ For example, wordsToCharList('gregor') returns ['g','r','e','g','o','r'].
 
 const wordsToCharList = (arr) => {
   // Solution code here...
+  let strArray=arr.split('');
+  let resultArr=[];
+  strArray.forEach(element=>{
+   resultArr.push(element)
+  })
+  return resultArr;
 };
 
 
@@ -121,12 +133,17 @@ const gruffaloCrumble = {
   ]
 };
 
-
 const listFoods = (recipe) => {
   let result = [];
+  let ingredientsArray=[];
   // Solution code here...
+  recipe.ingredients.forEach(element => {
+    ingredientsArray=element.split(' ');
+    result.push(ingredientsArray.slice(2,ingredientsArray.length).join(' '));
+  });
   return result;
 };
+listFoods(gruffaloCrumble);
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 5 - Stretch Goal
@@ -347,6 +364,6 @@ xdescribe('Testing challenge 11', () => {
 });
 
 
-function createSnippetWithJQuery(html){
+function createSnippetWithJQuery(html) {
   return cheerio.load(html);
 };
