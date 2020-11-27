@@ -17,12 +17,12 @@ let starWarsPeople = [
   {
     "name": "C-3PO",
     "height": "167",
-    "eye_color": "red"
+    "eye_color": "yellow"
   },
   {
     "name": "R2-D2",
     "height": "96",
-    "eye_color": "yellow"
+    "eye_color": "red"
   }
 ];
 
@@ -38,7 +38,7 @@ let $ = createSnippetWithJQuery(`
 
 const templateWithJQuery = () => {
   // Solution code here...
-  // console.log($.html());
+  console.log($.html());
   starWarsPeople.forEach(element => {
     let template=$('#template').clone();
     template.find('h2').text(element.name);
